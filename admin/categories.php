@@ -1,7 +1,6 @@
 <?php 
 require "path.php";
 include $path . "header.php";
-
 ?>
 
 <body>
@@ -9,8 +8,8 @@ include $path . "header.php";
     <div id="wrapper">
 
        <?php include $path . "nav.php"; ?>
-        <div id="page-wrapper">
 
+        <div id="page-wrapper">
             <div class="container-fluid">
 
                 <!-- Page Heading -->
@@ -25,26 +24,7 @@ include $path . "header.php";
                 <!-- /.row -->
                 <div class="col-xs-6">
 
-                <?php 
-                   if (isset($_POST['submit'])) {
-                       $new_category = $_POST['cat_title'];
-
-                       if ($new_category) {
-                           $add_category = "INSERT INTO categories(cat_title) VALUES('$new_category')";
-                           $result = mysqli_query($connection, $add_category);
-
-                           if (!$result) {
-                               die("<h1>Error</h1>" . mysqli_error($connection));
-                           } else {
-                               echo "<h1>Added</h1>";
-                           }
-                       } else {
-                           echo "Field cannot be empty";
-                       }
-                   } 
-                
-                ?>    
-
+                <?php insert_categories(); ?>    
 
                 <form action="" method="post">
                     <div class="form-group">
@@ -57,16 +37,11 @@ include $path . "header.php";
                     </div>
                 </form>
 
-               <?php 
-               
-               if (isset($_GET['edit'])) {
+                    <?php    
+                    if (isset($_GET['edit'])) {
+                        include $path . "update_cats.php"; 
+                    } ?>
 
-                   include $path . "update_cats.php"; 
-               }
-
-               ?>
-
-                
                 </div>
 
                 <div class="col-xs-6">
@@ -76,38 +51,11 @@ include $path . "header.php";
                      <th>Category</th>
                 </tr>
 
-                <?php 
-                
-                if (isset($_GET['delete'])) {
-                    $get_id = $_GET['delete'];
-                    if ($get_id !== 0) {
-                    $delete_query = "DELETE FROM categories WHERE cat_id = {$get_id}";
-                    $delete_result = mysqli_query($connection, $delete_query);
-                    header('Location: categories.php');
-                    }
-                }
-
-                
-                ?>    
+                <?php delete_category(); ?>    
 
 
-                <?php 
-                     $query = "SELECT * FROM categories";
-                     $categories = mysqli_query($connection, $query);
-
-                     while($row = mysqli_fetch_assoc($categories)) {
-                         $cat_title = $row['cat_title']; 
-                         $cat_id = $row['cat_id'];
-                         ?>
-
-                         
-                         <tr>
-                            <td><?php echo $cat_id ?></td>
-                            <td><?php echo $cat_title ?></td>
-                            <td><a href="categories.php?delete=<?php echo $cat_id ?>">Delete</a></td>
-                            <td><a href="categories.php?edit=<?php echo $cat_id ?>">Edit</a></td>
-                         </tr>
-                     <?php } ?>
+                <?php show_categories() ?>
+                  
                          </table>
                 
                 </div>
