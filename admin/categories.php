@@ -41,7 +41,7 @@ include $path . "header.php";
                        } else {
                            echo "Field cannot be empty";
                        }
-                   }
+                   } 
                 
                 ?>    
 
@@ -56,6 +56,16 @@ include $path . "header.php";
                     <input type="submit" name="submit" class="btn btn-primary">
                     </div>
                 </form>
+
+               <?php 
+               
+               if (isset($_GET['edit'])) {
+
+                   include $path . "update_cats.php"; 
+               }
+
+               ?>
+
                 
                 </div>
 
@@ -76,6 +86,7 @@ include $path . "header.php";
                     header('Location: categories.php');
                     }
                 }
+
                 
                 ?>    
 
@@ -94,6 +105,7 @@ include $path . "header.php";
                             <td><?php echo $cat_id ?></td>
                             <td><?php echo $cat_title ?></td>
                             <td><a href="categories.php?delete=<?php echo $cat_id ?>">Delete</a></td>
+                            <td><a href="categories.php?edit=<?php echo $cat_id ?>">Edit</a></td>
                          </tr>
                      <?php } ?>
                          </table>
