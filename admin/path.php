@@ -1,0 +1,1 @@
+<?php $path = '/var/www/public/php/cms/admin/includes/'; ?>
