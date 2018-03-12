@@ -35,6 +35,18 @@ function delete_category() {
     }
 }
 
+function delete_post() {
+    global $connection;
+    if (isset($_GET['delete'])) {
+        $get_post_id = $_GET['delete'];
+        if ($get_post_id !== 0) {
+        $delete_query = "DELETE FROM posts WHERE post_id = {$get_post_id}";
+        $delete_result = mysqli_query($connection, $delete_query);
+        header('Location: posts.php');
+        }
+    }
+}
+
 
 function show_categories() {
 
