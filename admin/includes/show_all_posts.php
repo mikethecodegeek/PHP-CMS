@@ -27,19 +27,20 @@
                     $post_tags = $row['post_tags'];
                     $post_status = $row['post_status'];
                     $post_image = $row['post_image']; 
+                    $post_category_id = $row['post_category_id'];
 
             ?>          <tr>
                          <td><?php echo $post_id; ?></td>
                          <td><?php echo $post_author; ?></td>
                          <td><?php echo $post_title; ?></td>
-                         <td>Mike Rules</td>
+                         <td><?php echo $post_category_id; ?></td>
                          <td><?php echo $post_status ?></td>
                          <td><img width=100px src="../images/<?php echo $post_image ?>"</td>
                          <td><?php echo $post_tags ?></td>
                          <td>Comment</td>
                          <td><?php echo $post_date ?></td> 
                          <td><a href="posts.php?delete=<?php echo $post_id ?>">Delete</a></td>
-                         <td><a href="posts.php?edit=<?php echo $post_id ?>">Edit</a></td> 
+                         <td><a href="posts.php?source=edit_post&edit=<?php echo $post_id ?>">Edit</a></td> 
                         </tr>
                           
 

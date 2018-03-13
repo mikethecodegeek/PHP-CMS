@@ -38,6 +38,10 @@ include $path . "header.php";
                         include "add_post.php";
                         break;
 
+                        case "edit_post":
+                        include "edit_post.php";
+                        break;
+
                         default:
                         include $path . 'show_all_posts.php';
                         break;

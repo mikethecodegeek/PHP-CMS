@@ -1,11 +1,5 @@
 <?php 
     if (isset($_POST['publish'])) {
-
-        print_r($_FILES);
-        echo "<br>";
-
-        print_r($_FILES['image']['name'] . "--->" . $_FILES['image']['tmp_name']);
-
         $title = $_POST['post_title'];
         $cat_id = $_POST['post_cat_id'];
         $author = $_POST['post_author'];
@@ -26,6 +20,7 @@
         $img_temp = $_FILES['image']['tmp_name'];
 
         move_uploaded_file($img_temp, "../images/$img");
+        header('Location: posts.php');
 
     }
 
