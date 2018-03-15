@@ -29,6 +29,8 @@
 
 ?>
 
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -79,7 +81,7 @@
 
 <div class="form-group">
 <label for="title">Post Content</label>
-<input type="text" class="form-control" name="post_content">
+<textarea rows="15" cols="10" class="form-control" name="post_content">></textarea>
 </div>
 
 <div class="form-group">
