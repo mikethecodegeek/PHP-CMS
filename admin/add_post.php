@@ -1,5 +1,6 @@
 <?php 
     if (isset($_POST['publish'])) {
+
         $title = $_POST['post_title'];
         $cat_id = $_POST['post_cat_id'];
         $author = $_POST['post_author'];
@@ -9,7 +10,9 @@
         $date = date('d-m-y');
         $image = $_FILES['image']['name'];
 
-        $insert = "INSERT INTO posts VALUES(NULL,1, '$title', '$author', now(), '$image','$content','$tags',1,'$status')";
+        print_r($cat_id);
+
+        $insert = "INSERT INTO posts VALUES(NULL,$cat_id, '$title', '$author', now(), '$image','$content','$tags',0,'$status')";
         $publish = mysqli_query($connection, $insert);
 
         if (!$publish) {
@@ -36,8 +39,22 @@
 </div>
 
 <div class="form-group">
-<label for="title">Post Category ID</label>
-<input type="text" class="form-control" name="post_cat_id">
+<label for="title">Category</label>
+<select name="post_cat_id" id="">
+    <?php 
+    
+    $query = "SELECT * FROM categories";
+    $category_id = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($category_id)) {
+        $cat_title = $row['cat_title'];
+        $cat_id = $row['cat_id'];
+       
+      echo "<option value='$cat_id'>$cat_title</option>";
+    }
+    ?>
+</select>
+<!-- <input type="text" class="form-control" name="post_cat_id"> -->
 </div>
 
 <div class="form-group">

@@ -28,16 +28,30 @@
                     $post_status = $row['post_status'];
                     $post_image = $row['post_image']; 
                     $post_category_id = $row['post_category_id'];
+                    $post_comment_count = $row['post_comment_count'];
 
             ?>          <tr>
                          <td><?php echo $post_id; ?></td>
                          <td><?php echo $post_author; ?></td>
                          <td><?php echo $post_title; ?></td>
-                         <td><?php echo $post_category_id; ?></td>
+
+                        <?php 
+                        
+                        $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
+                        $category_id = mysqli_query($connection, $query);
+                    
+                        while($row = mysqli_fetch_assoc($category_id)) {
+                            $cat_title = $row['cat_title']; 
+                           
+                          echo "<td> {$cat_title} </td>";
+                        }
+                        ?>
+
+
                          <td><?php echo $post_status ?></td>
                          <td><img width=100px src="../images/<?php echo $post_image ?>"</td>
                          <td><?php echo $post_tags ?></td>
-                         <td>Comment</td>
+                         <td><?php echo $post_comment_count ?></td>
                          <td><?php echo $post_date ?></td> 
                          <td><a href="posts.php?delete=<?php echo $post_id ?>">Delete</a></td>
                          <td><a href="posts.php?source=edit_post&edit=<?php echo $post_id ?>">Edit</a></td> 

@@ -18,6 +18,33 @@
                     </div>
                 
                 </form>
+
+                
+                    <!-- /.input-group -->
+                </div>
+
+                <div class="well">
+                    <h4>Login</h4>
+                <form action="includes/login.php" method="post">
+
+                    <div class="form-group">
+                    <!-- <label for="username">Username</label> -->
+                    <input type="text" name="username" class="form-control" placeholder="Username">
+                    </div>
+
+                    <div class="input-group">
+                    <!-- <label for="password">Password</label> -->
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" name="login">
+                                Login
+                        </button>
+                        </span>
+                    </div>
+                
+                </form>
+
+                
                     <!-- /.input-group -->
                 </div>
 
@@ -34,8 +61,10 @@
                             $categories = mysqli_query($connection, $query);
 
                             while($row = mysqli_fetch_assoc($categories)) {
-                                $cat_title = $row['cat_title']; ?>
-                                <li><a href="#"><?php echo $cat_title ?></a>
+                                $cat_title = $row['cat_title'];
+                                $cat_id = $row['cat_id']; ?>
+
+                                <li><a href="category.php?category=<?php echo $cat_id ?>"><?php echo $cat_title ?></a>
                                 </li>
                             <?php } ?>
                             </ul>

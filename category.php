@@ -19,11 +19,13 @@ include $path . "header.php";
             <div class="col-md-8">
 
             <?php 
+
+                if (isset($_GET['category'])) {
+                    $category = $_GET['category'];
+                }
                     
-                $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                $query = "SELECT * FROM posts WHERE post_category_id = $category";
                 $posts = mysqli_query($connection, $query);
-            
-              
 
                 while($row = mysqli_fetch_assoc($posts)) {
                     $post_id = $row['post_id'];
@@ -34,11 +36,9 @@ include $path . "header.php";
                     $post_tags = $row['post_tags'];
                     $post_status = $row['post_status'];
                     $post_image = $row['post_image'];
-
                     
-                 
-
-                    // if ($post_status == 'published') { ?>
+                
+            ?>
 
                 <h1 class="page-header">
                     Page Heading

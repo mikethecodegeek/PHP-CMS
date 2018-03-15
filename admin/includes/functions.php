@@ -1,5 +1,29 @@
 <?php 
 
+function approve_comment() {
+    global $connection;
+    $comment_id = $_GET['id'];
+    $query = "UPDATE comments SET comment_status='approved' WHERE comment_id=$comment_id";
+    $result = mysqli_query($connection,$query);
+
+    if (!$result) {
+        echo mysqli_error($connection);
+    }
+    header('Location: comments.php');
+}
+
+function unapprove_comment() {
+    global $connection;
+    $comment_id = $_GET['id'];
+    $query = "UPDATE comments SET comment_status='denied' WHERE comment_id=$comment_id";
+    $result = mysqli_query($connection,$query);
+
+    if (!$result) {
+        echo mysqli_error($connection);
+    }
+    header('Location: comments.php');
+}
+
 function insert_categories() {
 
     global $connection;
@@ -43,6 +67,30 @@ function delete_post() {
         $delete_query = "DELETE FROM posts WHERE post_id = {$get_post_id}";
         $delete_result = mysqli_query($connection, $delete_query);
         header('Location: posts.php');
+        }
+    }
+}
+
+function delete_comment() {
+    global $connection;
+    if (isset($_GET['delete'])) {
+        $get_comment_id = $_GET['delete'];
+        if ($get_comment_id !== 0) {
+        $delete_query = "DELETE FROM comments WHERE comment_id = {$get_comment_id}";
+        $delete_result = mysqli_query($connection, $delete_query);
+        header('Location: comments.php');
+        }
+    }
+}
+
+function delete_user() {
+    global $connection;
+    if (isset($_GET['delete'])) {
+        $get_user_id = $_GET['delete'];
+        if ($get_user_id !== 0) {
+        $delete_query = "DELETE FROM users WHERE user_id = {$get_user_id}";
+        $delete_result = mysqli_query($connection, $delete_query);
+        header('Location: users.php');
         }
     }
 }

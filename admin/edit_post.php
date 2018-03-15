@@ -16,7 +16,7 @@
      $img_temp = $_FILES['image']['tmp_name'];
 
      if (empty($img)) {
-        $get_image_query = "SELECT * FROM posts";
+        $get_image_query = "SELECT * FROM posts WHERE post_id = $post_to_edit";
         $apply_post_image = mysqli_query($connection, $get_image_query);
 
         while($row = mysqli_fetch_assoc($apply_post_image)) {
@@ -92,7 +92,12 @@
 
 <div class="form-group">
 <label for="title">Post Status</label>
-<input type="text" class="form-control" name="post_status" value="<?php echo $post_status;?>">
+<select name="post_status" id="">
+    <option value="draft">draft</option>
+    <option value="published">published</option>
+
+</select>
+<!-- <input type="text" class="form-control" name="post_status" value="<?php echo $post_status;?>"> -->
 </div>
 
 <div class="form-group">
